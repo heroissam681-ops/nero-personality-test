@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>اختبار تسجيل الدخول - NERO</title>
+<style>
+  body {
+    font-family: sans-serif;
+    background: #111;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    gap: 1.5rem;
+  }
+  button {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: none;
+    background: #4285F4;
+    color: #fff;
+    cursor: pointer;
+  }
+  #userInfo {
+    text-align: center;
+  }
+  #userInfo img {
+    border-radius: 50%;
+    width: 64px;
+    height: 64px;
+  }
+  #status {
+    color: #89E900;
+    font-family: monospace;
+    font-size: 0.8rem;
+  }
+</style>
+</head>
+<body>
+
+<h2>اختبار Firebase + Google Sign-In</h2>
+<div id="status">جاري تحميل Firebase...</div>
+<button id="loginBtn" style="display:none">تسجيل الدخول بـ Google</button>
+<button id="logoutBtn" style="display:none">تسجيل الخروج</button>
+<div id="userInfo"></div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import {
+    getAuth,
+    GoogleAuthProvider,
+    signInWithPopup,
+    signOut,
+    onAuthStateChanged
+  } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBm9fkmJytxneb2n0zg04mgSXBdV2KxG_g",
+    authDomain: "nero-test-e2255.firebaseapp.com",
+    projectId: "nero-test-e2255",
+    storageBucket: "nero-test-e2255.firebasestorage.app",
+    messagingSenderId: "394689363472",
+    appId: "1:394689363472:web:4b382dcece8ba779fed495",
+    measurementId: "G-FY4059T6N6"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const provider = new GoogleAuthProvider();
+
+  const statusEl = document.getElementById('status');
+  const loginBtn = document.getElementById('loginBtn');
+  const logoutBtn = document.getElementById('logoutBtn');
+  const userInfo = document.getElementById('userInfo');
+
+  statusEl.textContent = 'Firebase تحمّل بنجاح ✓';
+  loginBtn.style.display = 'inline-block';
+
+  loginBtn.addEventListener('click', async () => {
+    try {
+      await signInWithPopup(auth, provider);
+    } catch (err) {
+      statusEl.textContent = 'خطأ: ' + err.message;
+      statusEl.style.color = '#ff5555';
+    }
+  });
+
+  logoutBtn.addEventListener('click', async () => {
+    await signOut(auth);
+  });
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      loginBtn.style.display = 'none';
+      logoutBtn.style.display = 'inline-block';
+      userInfo.innerHTML = `
+        <img src="${user.photoURL || ''}" alt="">
+        <p>${user.displayName || ''}</p>
+        <p style="color:#888;font-size:0.8rem">${user.email || ''}</p>
+      `;
+      statusEl.textContent = 'تسجيل الدخول نجح ✓';
+    } else {
+      loginBtn.style.display = 'inline-block';
+      logoutBtn.style.display = 'none';
+      userInfo.innerHTML = '';
+    }
+  });
+</script>
+
+</body>
+</html>
