@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NERO — سياسة الخصوصية والشروط</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #080808;
+    --deep: #0f0f0f;
+    --surface: #141414;
+    --card: #161616;
+    --border: #1e1e1e;
+    --muted: #2a2a2a;
+    --dim: #999;
+    --light: #ddd;
+    --white: #f5f5f5;
+    --accent: #c8a96e; --accent2:#C8A24A;
+    --accent-rgb: 200,169,110;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  /* ═══ باليتات ألوان بديلة — نفس النظام ديال باقي صفحات NERO، مربوط
+     بنفس مفتاح localStorage ('nero_theme') باش اللون يبقى موحّد ═══ */
+  body.theme-kiwi {
+    --black:#222222; --surface:#2b2b2b; --card:#303030; --border:#3c3c3c;
+    --muted:#454545; --dim:#8a8a8a; --light:#e8e3dc; --white:#F5F2EB;
+    --accent:#89E900; --accent2:#00C2A8; --accent-rgb:137,233,0;
+  }
+  body.theme-purple {
+    --black:#141414; --surface:#1c1a1f; --card:#211f26; --border:#2c2933;
+    --muted:#3a3542; --dim:#7a7280; --light:#e2dce8; --white:#F1EDF5;
+    --accent:#7F49B4; --accent2:#C74FD6; --accent-rgb:127,73,180;
+  }
+  body.theme-burgundy {
+    --black:#1C1C1C; --surface:#241717; --card:#2a1a1a; --border:#3a2222;
+    --muted:#4a2a2a; --dim:#8a7070; --light:#ecdcdc; --white:#F5EDED;
+    --accent:#800020; --accent2:#C2185B; --accent-rgb:128,0,32;
+  }
+  body.theme-luxury {
+    --black:#121312; --surface:#1a1614; --card:#1f1a17; --border:#2e2620;
+    --muted:#3d332a; --dim:#8a7a68; --light:#ecdcc0; --white:#F5EDDD;
+    --accent:#ad0013; --accent2:#C8A24A; --accent-rgb:173,0,19;
+  }
+  /* ═══ NEW: 20 لون إضافي — نفس الأسماء والقيم بالضبط ديال باقي صفحات NERO ═══ */
+  body.theme-crimson  { --accent:#DC2626; --accent2:#F97316; --accent-rgb:220,38,38; }
+  body.theme-amber    { --accent:#F59E0B; --accent2:#FBBF24; --accent-rgb:245,158,11; }
+  body.theme-emerald  { --accent:#10B981; --accent2:#34D399; --accent-rgb:16,185,129; }
+  body.theme-teal      { --accent:#14B8A6; --accent2:#06B6D4; --accent-rgb:20,184,166; }
+  body.theme-cyan      { --accent:#06B6D4; --accent2:#0EA5E9; --accent-rgb:6,182,212; }
+  body.theme-sky        { --accent:#0EA5E9; --accent2:#6366F1; --accent-rgb:14,165,233; }
+  body.theme-cobalt    { --accent:#2563EB; --accent2:#8B5CF6; --accent-rgb:37,99,235; }
+  body.theme-indigo    { --accent:#6366F1; --accent2:#A855F7; --accent-rgb:99,102,241; }
+  body.theme-violet    { --accent:#8B5CF6; --accent2:#D946EF; --accent-rgb:139,92,246; }
+  body.theme-fuchsia  { --accent:#D946EF; --accent2:#F43F5E; --accent-rgb:217,70,239; }
+  body.theme-rose      { --accent:#F43F5E; --accent2:#FB7185; --accent-rgb:244,63,94; }
+  body.theme-orange  { --accent:#F97316; --accent2:#FBBF24; --accent-rgb:249,115,22; }
+  body.theme-lime      { --accent:#84CC16; --accent2:#A3E635; --accent-rgb:132,204,22; }
+  body.theme-mint      { --accent:#2DD4BF; --accent2:#5EEAD4; --accent-rgb:45,212,191; }
+  body.theme-coral    { --accent:#FF6F61; --accent2:#FF9F80; --accent-rgb:255,111,97; }
+  body.theme-ruby      { --accent:#9F1239; --accent2:#E11D48; --accent-rgb:159,18,57; }
+  body.theme-olive    { --accent:#84892E; --accent2:#A3A83E; --accent-rgb:132,137,46; }
+  body.theme-slate    { --accent:#64748B; --accent2:#94A3B8; --accent-rgb:100,116,139; }
+  body.theme-copper  { --accent:#B87333; --accent2:#D9995C; --accent-rgb:184,115,51; }
+  body.theme-jade      { --accent:#00A86B; --accent2:#34D399; --accent-rgb:0,168,107; }
+  .theme-toggle{background:transparent;border:1px solid var(--border);color:var(--white);width:28px;height:28px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;margin-inline-start:.4rem;padding:0;}
+  .theme-toggle:hover{border-color:var(--accent);}
+  .theme-toggle .swatch{width:12px;height:12px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:block;}
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Cairo', sans-serif;
+    line-height: 1.8;
+    padding-bottom: 4rem;
+  }
+  nav {
+    display:flex; justify-content:space-between; align-items:center;
+    padding: 1.2rem 1.5rem; border-bottom:1px solid var(--border);
+    position:sticky; top:0; background:rgba(8,8,8,0.92); backdrop-filter:blur(8px); z-index:10;
+  }
+  .logo { font-family:'Space Mono',monospace; font-weight:700; letter-spacing:.15em; color:var(--accent); }
+  .lang-switcher { display:flex; gap:.4rem; }
+  .lang-btn { background:transparent; border:1px solid var(--border); color:var(--dim); font-family:'Space Mono',monospace; font-size:.75rem; padding:.3rem .6rem; border-radius:4px; cursor:pointer; }
+  .lang-btn.active { color:var(--accent); border-color:var(--accent); }
+  main { max-width: 720px; margin:0 auto; padding: 2.2rem 1.5rem; }
+  h1 { font-size:1.6rem; margin-bottom:.4rem; }
+  .updated { font-family:'Space Mono',monospace; font-size:.72rem; color:var(--dim); margin-bottom:2rem; }
+  .tabs { display:flex; gap:.5rem; margin-bottom:2rem; border-bottom:1px solid var(--border); flex-wrap:wrap; }
+  .tab-btn { background:transparent; border:none; color:var(--dim); font-family:'Cairo',sans-serif; font-weight:700; font-size:.9rem; padding:.7rem .3rem; cursor:pointer; border-bottom:2px solid transparent; }
+  .tab-btn.active { color:var(--accent); border-color:var(--accent); }
+  section.tab-content { display:none; }
+  section.tab-content.active { display:block; }
+  h2 { font-size:1.1rem; color:var(--accent); margin:1.6rem 0 .6rem; }
+  h2:first-child { margin-top:0; }
+  p, li { color:var(--light); font-size:.92rem; }
+  ul { padding-inline-start: 1.3rem; margin:.4rem 0; }
+  li { margin-bottom:.3rem; }
+  .note { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:1rem 1.2rem; font-size:.85rem; color:var(--dim); margin-top:2rem; }
+  .placeholder { color:var(--accent); }
+  footer { text-align:center; font-family:'Space Mono',monospace; font-size:.7rem; color:var(--dim); margin-top:3rem; }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="logo">NERO</span>
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="setLang('ar')">AR</button>
+    <button class="lang-btn" onclick="setLang('fr')">FR</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+    <button class="theme-toggle" onclick="toggleTheme()" title="Theme"><span class="swatch"></span></button>
+  </div>
+</nav>
+
+<main>
+  <h1 data-ar="الخصوصية والشروط" data-fr="Confidentialité et conditions" data-en="Privacy & Terms">الخصوصية والشروط</h1>
+  <div class="updated" data-ar="آخر تحديث: يوليو 2026" data-fr="Dernière mise à jour : juillet 2026" data-en="Last updated: July 2026">آخر تحديث: يوليوز 2026</div>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showTab('privacy')" data-ar="سياسة الخصوصية" data-fr="Confidentialité" data-en="Privacy Policy">سياسة الخصوصية</button>
+    <button class="tab-btn" onclick="showTab('terms')" data-ar="الشروط والأحكام" data-fr="Conditions" data-en="Terms of Service">الشروط والأحكام</button>
+    <button class="tab-btn" onclick="showTab('refund')" data-ar="سياسة الاسترجاع" data-fr="Remboursement" data-en="Refund Policy">سياسة الاسترجاع</button>
+  </div>
+
+  <!-- ═══ PRIVACY ═══ -->
+  <section id="tab-privacy" class="tab-content active">
+    <h2 data-ar="ما هي المعلومات التي نجمعها" data-fr="Quelles informations nous collectons" data-en="What information we collect">ما هي المعلومات التي نجمعها</h2>
+    <p data-ar="NERO موقع بسيط — لا نخزّن إجاباتك في الاختبار على أي خادم. كل شيء يُحسب مباشرة في متصفحك (متصفح الهاتف أو الحاسوب)." data-fr="NERO est un site simple — nous ne stockons pas vos réponses au test sur un serveur. Tout est calculé directement dans votre navigateur." data-en="NERO is a simple site — we don't store your test answers on any server. Everything is calculated directly in your browser.">NERO موقع بسيط — لا نخزّن إجاباتك في الاختبار على أي خادم. كل شيء يُحسب مباشرة في متصفحك (متصفح الهاتف أو الحاسوب).</p>
+    <ul>
+      <li data-ar="تبقى إجاباتك عن الأسئلة والتعليقات الاختيارية محفوظة محلياً في متصفحك (localStorage) لتتمكن من العودة إلى نتيجتك، ولا تصل إلينا أبداً." data-fr="Vos réponses et commentaires optionnels sont sauvegardés localement dans votre navigateur (localStorage) pour retrouver votre résultat — ils ne nous parviennent jamais." data-en="Your answers and optional comments are saved locally in your browser (localStorage) so you can return to your result — they never reach us.">تبقى إجاباتك عن الأسئلة والتعليقات الاختيارية محفوظة محلياً في متصفحك (localStorage) لتتمكن من العودة إلى نتيجتك، ولا تصل إلينا أبداً.</li>
+      <li data-ar="إذا دفعت للحصول على التحليل الكامل، فإن عملية الدفع تتم عبر Gumroad — وهي الجهة التي تجمع معلومات الدفع (البريد الإلكتروني، بيانات البطاقة) وفق سياسة الخصوصية الخاصة بها، وليس نحن." data-fr="Si vous payez pour l'analyse complète, le paiement passe par Gumroad, qui collecte les informations de paiement (email, carte) selon sa propre politique de confidentialité." data-en="If you pay for the full analysis, payment goes through Gumroad, which collects payment info (email, card) under its own privacy policy — not us.">إذا دفعت للحصول على التحليل الكامل، فإن عملية الدفع تتم عبر Gumroad — وهي الجهة التي تجمع معلومات الدفع (البريد الإلكتروني، بيانات البطاقة) وفق سياسة الخصوصية الخاصة بها، وليس نحن.</li>
+    </ul>
+
+    <h2 data-ar="Cookies و التخزين المحلي" data-fr="Cookies et stockage local" data-en="Cookies & local storage">Cookies و التخزين المحلي</h2>
+    <p data-ar="نستخدم localStorage (نوع من التخزين المحلي في المتصفح، وليس كوكي تقليدياً) لحفظ: اللغة المختارة، والسمة اللونية، وحالة الدفع (premium). يمكنك مسحها في أي وقت من إعدادات متصفحك." data-fr="Nous utilisons le localStorage (stockage local du navigateur) pour sauvegarder : la langue choisie, le thème, et le statut de paiement (premium). Vous pouvez l'effacer à tout moment depuis les réglages de votre navigateur." data-en="We use localStorage (browser-local storage, not a traditional cookie) to save: your chosen language, theme, and premium payment status. You can clear it anytime from your browser settings.">نستخدم localStorage (نوع من التخزين المحلي في المتصفح، وليس كوكي تقليدياً) لحفظ: اللغة المختارة، والسمة اللونية، وحالة الدفع (premium). يمكنك مسحها في أي وقت من إعدادات متصفحك.</p>
+
+    <h2 data-ar="هل نشارك معلوماتك مع أي جهة؟" data-fr="Partageons-nous vos informations ?" data-en="Do we share your information?">هل نشارك معلوماتك مع أي جهة؟</h2>
+    <p data-ar="لا. لا نبيع ولا نشارك أي معلومة شخصية مع أطراف خارجية، باستثناء Gumroad لمعالجة الدفع (إذا اخترت شراء النسخة الكاملة)." data-fr="Non. Nous ne vendons ni ne partageons aucune information personnelle avec des tiers, à l'exception de Gumroad pour le traitement du paiement (si vous achetez la version complète)." data-en="No. We don't sell or share any personal information with third parties, except Gumroad for payment processing (if you purchase the full version).">لا. لا نبيع ولا نشارك أي معلومة شخصية مع أطراف خارجية، باستثناء Gumroad لمعالجة الدفع (إذا اخترت شراء النسخة الكاملة).</p>
+
+    <h2 data-ar="تواصل معانا" data-fr="Nous contacter" data-en="Contact us">تواصل معانا</h2>
+    <p data-ar="لديك سؤال حول الخصوصية؟ راسلنا على: <span class='placeholder'>bananeissam91@gmail.com</span>" data-fr="Une question sur la confidentialité ? Contactez-nous : <span class='placeholder'>bananeissam91@gmail.com</span>" data-en="Question about privacy? Contact us at: <span class='placeholder'>bananeissam91@gmail.com</span>">لديك سؤال حول الخصوصية؟ راسلنا على: <span class="placeholder">bananeissam91@gmail.com</span></p>
+  </section>
+
+  <!-- ═══ TERMS ═══ -->
+  <section id="tab-terms" class="tab-content">
+    <h2 data-ar="ما هو NERO" data-fr="Qu'est-ce que NERO" data-en="What NERO is">ما هو NERO</h2>
+    <p data-ar="NERO اختبار شخصية لأغراض الترفيه والتطور الذاتي، مبني على نظرية الوظائف الإدراكية لكارل يونغ ونظام الإنيغرام. النتائج مخصصة للتأمل الذاتي فقط — وليست تشخيصاً نفسياً أو طبياً، ولا تغني عن استشارة مختص." data-fr="NERO est un test de personnalité à but de divertissement et de développement personnel, basé sur la théorie des fonctions cognitives de Carl Jung et l'ennéagramme. Les résultats sont destinés à la réflexion personnelle uniquement — ce n'est pas un diagnostic psychologique ou médical et ne remplace pas une consultation professionnelle." data-en="NERO is a personality test for entertainment and self-development, based on Carl Jung's cognitive functions theory and the Enneagram. Results are for self-reflection only — this is not a psychological or medical diagnosis and does not replace professional consultation.">NERO اختبار شخصية لأغراض الترفيه والتطور الذاتي، مبني على نظرية الوظائف الإدراكية لكارل يونغ ونظام الإنيغرام. النتائج مخصصة للتأمل الذاتي فقط — وليست تشخيصاً نفسياً أو طبياً، ولا تغني عن استشارة مختص.</p>
+
+    <h2 data-ar="السن المطلوب" data-fr="Âge requis" data-en="Age requirement">السن المطلوب</h2>
+    <p data-ar="يجب أن يكون عمرك 18 سنة أو أكثر لاستخدام NERO، بما في ذلك النسخة المجانية. هذا الشرط موحّد مع السن القانوني المطلوب من طرف Gumroad لإتمام أي عملية دفع، لتفادي أي تضارب بين الوصول للاختبار وإمكانية الشراء." data-fr="Vous devez avoir 18 ans ou plus pour utiliser NERO, y compris la version gratuite. Cette condition est alignée avec l'âge légal requis par Gumroad pour tout paiement, afin d'éviter toute incohérence entre l'accès au test et la possibilité d'achat." data-en="You must be 18 years or older to use NERO, including the free version. This requirement is aligned with the legal age required by Gumroad for any payment, to avoid inconsistency between quiz access and purchase eligibility.">يجب أن يكون عمرك 18 سنة أو أكثر لاستخدام NERO، بما في ذلك النسخة المجانية. هذا الشرط موحّد مع السن القانوني المطلوب من طرف Gumroad لإتمام أي عملية دفع، لتفادي أي تضارب بين الوصول للاختبار وإمكانية الشراء.</p>
+
+    <h2 data-ar="الدفع" data-fr="Paiement" data-en="Payment">الدفع</h2>
+    <p data-ar="التحليل الكامل بالذكاء الاصطناعي متاح مقابل دفعة واحدة (49 درهماً أو ما يعادلها) عبر Gumroad. تفتح الدفعة النتيجة الكاملة مباشرة — بلا اشتراك، وبلا تجديد تلقائي." data-fr="L'analyse complète par IA est disponible pour un paiement unique (49 MAD ou équivalent) via Gumroad. Le paiement débloque immédiatement le résultat complet — pas d'abonnement, pas de renouvellement automatique." data-en="The full AI analysis is available for a one-time payment (49 MAD or equivalent) via Gumroad. Payment unlocks the full result immediately — no subscription, no auto-renewal.">التحليل الكامل بالذكاء الاصطناعي متاح مقابل دفعة واحدة (49 درهماً أو ما يعادلها) عبر Gumroad. تفتح الدفعة النتيجة الكاملة مباشرة — بلا اشتراك، وبلا تجديد تلقائي.</p>
+
+    <h2 data-ar="الملكية الفكرية" data-fr="Propriété intellectuelle" data-en="Intellectual property">الملكية الفكرية</h2>
+    <p data-ar="محتوى الموقع (الأسئلة، التصميم، النصوص، الصور الرمزية) ملك لـ NERO. أما نتيجتك الشخصية فيمكنك مشاركتها أينما شئت." data-fr="Le contenu du site (questions, design, textes, avatars) appartient à NERO. Votre résultat personnel, vous pouvez le partager où vous voulez." data-en="The site's content (questions, design, text, avatars) belongs to NERO. Your personal result, you may share wherever you like.">محتوى الموقع (الأسئلة، التصميم، النصوص، الصور الرمزية) ملك لـ NERO. أما نتيجتك الشخصية فيمكنك مشاركتها أينما شئت.</p>
+
+    <h2 data-ar="حدود المسؤولية" data-fr="Limitation de responsabilité" data-en="Limitation of liability">حدود المسؤولية</h2>
+    <p data-ar="يُقدَّم NERO لأغراض الترفيه والتأمل الذاتي فقط. لا نتحمل مسؤولية أي قرار (مهني أو عاطفي أو غيره) يُتخذ بناءً على النتيجة." data-fr="NERO est fourni à des fins de divertissement et de réflexion personnelle uniquement. Nous ne sommes pas responsables des décisions (professionnelles, sentimentales ou autres) prises sur la base du résultat." data-en="NERO is provided for entertainment and self-reflection purposes only. We are not liable for any decisions (professional, personal, or otherwise) made based on the result.">يُقدَّم NERO لأغراض الترفيه والتأمل الذاتي فقط. لا نتحمل مسؤولية أي قرار (مهني أو عاطفي أو غيره) يُتخذ بناءً على النتيجة.</p>
+  </section>
+
+  <!-- ═══ REFUND ═══ -->
+  <section id="tab-refund" class="tab-content">
+    <h2 data-ar="سياسة الاسترجاع" data-fr="Politique de remboursement" data-en="Refund policy">سياسة الاسترجاع</h2>
+    <p data-ar="بما أن NERO منتج رقمي يُسلَّم مباشرة بعد الدفع (تظهر النتيجة فوراً)، فإنه بصفة عامة لا يوجد استرجاع بعد فتح النتيجة الكاملة." data-fr="Comme NERO est un produit numérique livré immédiatement après paiement (le résultat s'affiche instantanément), aucun remboursement n'est généralement possible une fois le résultat complet débloqué." data-en="As NERO is a digital product delivered immediately after payment (the result appears instantly), no refund is generally available once the full result has been unlocked.">بما أن NERO منتج رقمي يُسلَّم مباشرة بعد الدفع (تظهر النتيجة فوراً)، فإنه بصفة عامة لا يوجد استرجاع بعد فتح النتيجة الكاملة.</p>
+
+    <h2 data-ar="في حال وجود مشكل تقني" data-fr="En cas de problème technique" data-en="If there's a technical issue">في حال وجود مشكل تقني</h2>
+    <p data-ar="إذا دفعت ولم تظهر لك النتيجة الكاملة بسبب مشكل تقني (كخلل برمجي، أو تسجيل الدفع دون فتح النسخة المدفوعة...)، راسلنا خلال 48 ساعة على <span class='placeholder'>bananeissam91@gmail.com</span> مع صورة تثبت الدفع، وسنعمل على حل المشكلة أو استرجاع المبلغ." data-fr="Si vous avez payé mais que le résultat complet ne s'est pas débloqué à cause d'un problème technique, contactez-nous sous 48h à <span class='placeholder'>bananeissam91@gmail.com</span> avec une preuve de paiement — nous résoudrons le problème ou vous rembourserons." data-en="If you paid but the full result didn't unlock due to a technical issue, contact us within 48 hours at <span class='placeholder'>bananeissam91@gmail.com</span> with proof of payment — we'll fix the issue or refund you.">إذا دفعت ولم تظهر لك النتيجة الكاملة بسبب مشكل تقني (كخلل برمجي، أو تسجيل الدفع دون فتح النسخة المدفوعة...)، راسلنا خلال 48 ساعة على <span class="placeholder">bananeissam91@gmail.com</span> مع صورة تثبت الدفع، وسنعمل على حل المشكلة أو استرجاع المبلغ.</p>
+
+    <div class="note" data-ar="ملاحظة: لدى Gumroad أيضاً سياسته الخاصة لمعالجة النزاعات المتعلقة بالدفع مباشرة." data-fr="Note : Gumroad a également sa propre politique pour traiter les litiges liés au paiement directement." data-en="Note: Gumroad also has its own policy for handling payment-related disputes directly.">ملاحظة: لدى Gumroad أيضاً سياسته الخاصة لمعالجة النزاعات المتعلقة بالدفع مباشرة.</div>
+  </section>
+
+  <footer>NERO · <span data-ar="صُنع بشغف في المغرب" data-fr="Fait avec passion au Maroc" data-en="Made with passion in Morocco">صُنع بشغف في المغرب</span> 🇲🇦 · 2026</footer>
+</main>
+
+<script>
+const NERO_THEMES = ['', 'theme-kiwi', 'theme-purple', 'theme-burgundy', 'theme-luxury', 'theme-crimson', 'theme-amber', 'theme-emerald', 'theme-teal', 'theme-cyan', 'theme-sky', 'theme-cobalt', 'theme-indigo', 'theme-violet', 'theme-fuchsia', 'theme-rose', 'theme-orange', 'theme-lime', 'theme-mint', 'theme-coral', 'theme-ruby', 'theme-olive', 'theme-slate', 'theme-copper', 'theme-jade'];
+function toggleTheme() {
+  const cur = NERO_THEMES.findIndex(t => t && document.body.classList.contains(t));
+  const curIdx = cur === -1 ? 0 : cur;
+  const nextIdx = (curIdx + 1) % NERO_THEMES.length;
+  NERO_THEMES.forEach(t => t && document.body.classList.remove(t));
+  if (NERO_THEMES[nextIdx]) document.body.classList.add(NERO_THEMES[nextIdx]);
+  try { localStorage.setItem('nero_theme', NERO_THEMES[nextIdx]); } catch(e) {}
+}
+(function loadSavedTheme() {
+  try {
+    const saved = localStorage.getItem('nero_theme');
+    if (saved && NERO_THEMES.includes(saved) && saved) document.body.classList.add(saved);
+  } catch(e) {}
+})();
+function setLang(l) {
+  document.documentElement.lang = l;
+  document.documentElement.dir = l === 'ar' ? 'rtl' : 'ltr';
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector(`.lang-btn[onclick="setLang('${l}')"]`).classList.add('active');
+  document.querySelectorAll('[data-ar]').forEach(el => {
+    const val = el.getAttribute('data-' + l);
+    if (val) el.innerHTML = val;
+  });
+  try { localStorage.setItem('nero_lang', l); } catch(e) {}
+}
+function showTab(name) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  event.target.classList.add('active');
+}
+(function init() {
+  try {
+    const saved = localStorage.getItem('nero_lang');
+    if (saved && saved !== 'ar') setLang(saved);
+  } catch(e) {}
+})();
+</script>
+</body>
+</html>
